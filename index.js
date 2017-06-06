@@ -41,7 +41,6 @@ request(url.metro, (err, response, html) => {
 
     const payload = {
       attachments: [],
-      channel: "@adamkelsall",
       text: "One or more Metro disruptions has been detected following a period where there were none :frowning:",
     }
 
