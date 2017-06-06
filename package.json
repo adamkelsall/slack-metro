@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/adamkelsall/slack-metro/issues"
   },
-  "homepage": "https://github.com/adamkelsall/slack-metro#readme"
+  "homepage": "https://github.com/adamkelsall/slack-metro#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.1"
+  }
 }
