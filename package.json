@@ -1,0 +1,28 @@
+{
+  "name": "slack-metro",
+  "version": "0.1.0",
+  "description": "A Slack integration that posts whenever there is a delay to Nexus Metro service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamkelsall/slack-metro.git"
+  },
+  "keywords": [
+    "nodejs",
+    "slack",
+    "metro"
+  ],
+  "author": "Adam Kelsall",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/adamkelsall/slack-metro/issues"
+  },
+  "homepage": "https://github.com/adamkelsall/slack-metro#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.1",
+    "request": "^2.81.0"
+  }
+}
