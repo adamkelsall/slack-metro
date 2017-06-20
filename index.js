@@ -39,25 +39,34 @@ request(url.metro, (err, response, html) => {
 
   } else if (!lastWasDisruption && disruptions.length) {
 
-    const payload = {
-      attachments: [],
-      text: "One or more Metro disruptions has been detected following a period where there were none :frowning:",
-    }
+    const disruptionsData = [];
 
-    disruptions.each((index, element) => {
-      const lines = $(element)
-        .text()
-        .trim()
-        .split("\n")
-        .map(line => line.trim().replace(/\s+/g, " "))
-        .filter(line => line);
-      
-      payload.attachments.push({
-        title: `Disruption ${index + 1}`,
-        text: lines.join("\n"),
+    disruptions.each((disruptionIndex, disruption) => {
+      const disruptionData = {
+        index: disruptionIndex,
+      };
+
+      const lines = [];
+
+      $(disruption).children("p").each((paragraphIndex, paragraph) => {
+        const line = $(paragraph).text().replace(/\s+/g, " ").trim();
+        lines.push(line);
       });
-      
+
+      disruptionData.description = lines.join("\n");
+      disruptionsData.push(disruptionData);
+
     });
+
+    const payload = {
+      text: "One or more Metro disruptions has been detected following a period where there were none :frowning:",
+      attachments: disruptionsData.map((disruption) => {
+        return {
+          title: `Disruption ${disruption.index + 1}`,
+          text: disruption.description,
+        };
+      }),
+    }
 
     try {
       fs.writeFileSync("./disruption.txt", new Date().toISOString());
