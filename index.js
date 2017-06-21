@@ -64,7 +64,6 @@ request(url.metro, (err, response, html) => {
     });
 
     const payload = {
-      channel: "@adamkelsall",
       text: "One or more Metro disruptions has been detected following a period where there were none :frowning:",
       attachments: disruptionsData.map((disruption) => {
         const updated = moment(disruption.updated);
