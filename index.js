@@ -1,5 +1,6 @@
 const cheerio = require("cheerio");
 const fs = require("fs");
+const moment = require("moment");
 const request = require("request");
 
 const url = {
@@ -53,17 +54,27 @@ request(url.metro, (err, response, html) => {
         lines.push(line);
       });
 
+      const updatedText = $(disruption).children("div").text().replace(/(\s|Updated at)+/g, " ").trim();
+      const updatedFormat = "HH:mm, dddd, D MMMM YYYY";
+      disruptionData.updated = moment(updatedText, updatedFormat).toDate();
+
       disruptionData.description = lines.join("\n");
       disruptionsData.push(disruptionData);
 
     });
 
     const payload = {
+      channel: "@adamkelsall",
       text: "One or more Metro disruptions has been detected following a period where there were none :frowning:",
       attachments: disruptionsData.map((disruption) => {
+        const updated = moment(disruption.updated);
+        const time = updated.format("H:mma");
+        const date = updated.format("dddd Do MMMM");
+
         return {
           title: `Disruption ${disruption.index + 1}`,
-          text: disruption.description,
+          text: `${disruption.description}\n_Updated at ${time} on ${date}_`,
+          mrkdwn_in: ["text"],
         };
       }),
     }
