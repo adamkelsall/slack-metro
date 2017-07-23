@@ -10,7 +10,7 @@ export interface SlackMessage {
   username?: string;
 }
 
-interface SlackMessageAttachment {
+export interface SlackMessageAttachment {
   color?: string;
   mrkdwn_in?: SlackMarkdownIn[];
   pretext?: string;

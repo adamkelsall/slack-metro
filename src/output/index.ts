@@ -1,2 +1,3 @@
+export { createSlackMessage } from "./createSlackMessage";
 export { printError } from "./printError";
-export { postToSlack, SlackMessage } from "./postToSlack";
+export { postToSlack, SlackMessage, SlackMessageAttachment } from "./postToSlack";
