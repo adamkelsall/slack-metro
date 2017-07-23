@@ -1,13 +1,23 @@
 import * as chalk from "chalk";
 
+import { Config, getConfig } from "../config";
+
 export function printError(error: Error): void {
+  let showStack: boolean;
+  try {
+    const config: Config = getConfig();
+    showStack = config.debug;
+  } catch (err) {
+    showStack = false;
+  }
+
   const warning = chalk.red("ERROR!");
   const title = "Metro Disruptions";
 
   console.error(`${warning} ${title}\n`);
   console.error(errorRow("Type", error.name));
   console.error(errorRow("Message", error.message));
-  console.error(errorStack(error.stack));
+  if (showStack) { console.error(errorStack(error.stack)); }
 }
 
 function errorRow(title: string, content: string): string {

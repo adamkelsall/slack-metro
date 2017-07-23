@@ -1,15 +1,22 @@
 import "reflect-metadata";
 
+import { Config, getConfig, setConfig } from "./config";
 import { formatDisruption, getDisruptions, getWebPage } from "./input";
+import { printError } from "./output";
 
 async function processMetroDisruptions(): Promise<void> {
-  const url = "https://www.nexus.org.uk/metro/updates";
-  const body = await getWebPage(url);
+  try {
+    setConfig();
+    const config: Config = getConfig();
 
-  const disruptions = getDisruptions(body);
-  disruptions.each((index, disruption) => {
-    console.log(formatDisruption(disruption));
-  });
+    const metroPage: string = await getWebPage("https://www.nexus.org.uk/metro/updates");
+    const disruptions: Cheerio = getDisruptions(metroPage);
+
+    console.log(disruptions.length);
+
+  } catch (err) {
+    printError(err);
+  }
 }
 
 processMetroDisruptions();
