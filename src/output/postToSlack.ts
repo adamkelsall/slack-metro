@@ -1,6 +1,6 @@
 import * as request from "request";
 
-interface SlackMessage {
+export interface SlackMessage {
   attachments?: SlackMessageAttachment[];
   channel?: string;
   icon_emoji?: string;
