@@ -4,6 +4,10 @@
   "description": "A Slack integration that posts whenever there is a delay to Nexus Metro service",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf dist/",
+    "build": "npm run clean && tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,8 +26,23 @@
   },
   "homepage": "https://github.com/adamkelsall/slack-metro#readme",
   "dependencies": {
+    "@types/dotenv": "^4.0.0",
+    "chalk": "^2.0.1",
     "cheerio": "^1.0.0-rc.1",
-    "moment": "^2.18.1",
+    "dotenv": "^4.0.0",
+    "moment-timezone": "^0.5.13",
+    "reflect-metadata": "^0.1.10",
     "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/cheerio": "^0.22.2",
+    "@types/moment-timezone": "^0.2.34",
+    "@types/node": "^8.0.11",
+    "@types/request": "0.0.46",
+    "ts-node": "^3.2.0",
+    "tslint": "^5.5.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.4.1"
   }
 }
