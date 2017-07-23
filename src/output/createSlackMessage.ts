@@ -7,7 +7,6 @@ import { Disruption, formatDisruption } from "../input";
 
 export function createSlackMessage(previousCount: number, disruptions: Cheerio): SlackMessage {
   const message: SlackMessage = {
-    channel: "@adamkelsall", // TODO remove
     text: textForCount(previousCount, disruptions.length),
   };
 
