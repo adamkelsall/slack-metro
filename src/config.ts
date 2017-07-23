@@ -7,7 +7,7 @@ export interface Config {
 
 export function getConfig(): Config {
   return {
-    debug: getEnv("DEBUG").toLowerCase() === "true",
+    debug: getEnv("DEBUG", "false").toLowerCase() === "true",
     slackWebhookUrl: getEnv("SLACK_WEBHOOK_URL"),
   };
 }
