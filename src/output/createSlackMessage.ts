@@ -32,7 +32,7 @@ export function createSlackMessage(previousCount: number, disruptions: Cheerio):
 
       return attachment;
     });
-  };
+  }
 
   return message;
 }
