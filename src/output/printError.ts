@@ -1,6 +1,6 @@
 import * as chalk from "chalk";
 
-export function outputError(error: Error): void {
+export function printError(error: Error): void {
   const warning = chalk.red("ERROR!");
   const title = "Metro Disruptions";
 

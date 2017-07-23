@@ -1,5 +1,11 @@
 import "reflect-metadata";
 
-import { outputError } from "./output";
+import { postToSlack } from "./output";
 
-outputError(new Error("foo bar"));
+postToSlack(
+  "https://hooks.slack.com/services/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",
+  {
+    channel: "@adamkelsall",
+    text: "TypeScript Slack message text",
+  }
+);

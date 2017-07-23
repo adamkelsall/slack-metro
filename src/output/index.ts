@@ -1,1 +1,2 @@
-export { outputError } from "./outputError";
+export { printError } from "./printError";
+export { postToSlack } from "./postToSlack";
