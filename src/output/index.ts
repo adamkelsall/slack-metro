@@ -1,0 +1,1 @@
+export { outputError } from "./outputError";
