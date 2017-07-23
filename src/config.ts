@@ -23,7 +23,7 @@ function getEnv(key: string, defaultValue?: any): any {
       throw new Error(`Missing environment variable ${key}`);
     }
 
-    return defaultValue
+    return defaultValue;
   }
 
   return process.env[key];

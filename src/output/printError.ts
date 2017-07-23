@@ -1,3 +1,5 @@
+/* tslint:disable:no-console */
+
 import * as chalk from "chalk";
 
 import { Config, getConfig } from "../config";

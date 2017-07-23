@@ -1,7 +1,7 @@
 import "reflect-metadata";
 
 import { Config, getConfig, setConfig } from "./config";
-import { formatDisruption, getDisruptions, getWebPage } from "./input";
+import { getDisruptions, getWebPage } from "./input";
 import { createSlackMessage, postToSlack, printError } from "./output";
 import { PersistedData, readPersistedData, writePersistedData } from "./persist";
 

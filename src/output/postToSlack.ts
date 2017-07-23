@@ -24,9 +24,9 @@ type SlackMarkdownIn = "pretext" | "text";
 export function postToSlack(hookUrl: string, message: SlackMessage): Promise<string> {
   return new Promise((resolve, reject) => {
     const requestOptions = {
-      url: hookUrl,
-      json: true,
       body: message,
+      json: true,
+      url: hookUrl,
     };
 
     request.post(requestOptions, (err, response, body) => {

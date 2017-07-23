@@ -12,7 +12,6 @@ export function createSlackMessage(disruptions: Cheerio): SlackMessage {
   });
 
   const message: SlackMessage = {
-    text: "One or more disruptions have been detected following a period where there were none :frowning:",
     attachments: formattedDisruptions.map((disruption, index) => {
       const lines = disruption.lines.join("\n");
       const updated: Moment = moment(disruption.updated);
@@ -20,13 +19,14 @@ export function createSlackMessage(disruptions: Cheerio): SlackMessage {
       const date: string = updated.format("dddd Do MMMM");
 
       const attachment: SlackMessageAttachment = {
-        title: `Disruption ${index + 1}`,
-        text: `${lines}\n_Updated at ${time} on ${date}_`,
         mrkdwn_in: ["text"],
+        text: `${lines}\n_Updated at ${time} on ${date}_`,
+        title: `Disruption ${index + 1}`,
       };
 
       return attachment;
     }),
+    text: "One or more disruptions have been detected following a period where there were none :frowning:",
   };
 
   return message;
