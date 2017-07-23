@@ -26,19 +26,21 @@
   },
   "homepage": "https://github.com/adamkelsall/slack-metro#readme",
   "dependencies": {
-    "@types/dotenv": "^4.0.0",
     "chalk": "^2.0.1",
     "cheerio": "^1.0.0-rc.1",
     "dotenv": "^4.0.0",
     "moment-timezone": "^0.5.13",
+    "pluralize": "^6.0.0",
     "reflect-metadata": "^0.1.10",
     "request": "^2.81.0"
   },
   "devDependencies": {
     "@types/chalk": "^0.4.31",
     "@types/cheerio": "^0.22.2",
+    "@types/dotenv": "^4.0.0",
     "@types/moment-timezone": "^0.2.34",
     "@types/node": "^8.0.11",
+    "@types/pluralize": "0.0.27",
     "@types/request": "0.0.46",
     "ts-node": "^3.2.0",
     "tslint": "^5.5.0",
