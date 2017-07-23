@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 export interface PersistedData {
-  lastWasDisruption: boolean;
+  disruptions: number;
 }
 
 export function readPersistedData(): Promise<PersistedData> {
@@ -10,7 +10,7 @@ export function readPersistedData(): Promise<PersistedData> {
     fs.readFile(persistedFile(), (err, data) => {
       if (err) {
         const defaultData: PersistedData = {
-          lastWasDisruption: false,
+          disruptions: 0,
         };
 
         return /ENOENT/.test(err.message) ? resolve(defaultData) : reject(err);

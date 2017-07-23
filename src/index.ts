@@ -14,13 +14,13 @@ async function processMetroDisruptions(): Promise<void> {
     const disruptions: Cheerio = getDisruptions(metroPage);
 
     const persistedData: PersistedData = await readPersistedData();
-    if (!persistedData.lastWasDisruption && disruptions.length) {
-      const message = createSlackMessage(disruptions);
+    if (persistedData.disruptions !== disruptions.length) {
+      const message = createSlackMessage(persistedData.disruptions, disruptions);
       await postToSlack(config.slackWebhookUrl, message);
     }
 
     await writePersistedData({
-      lastWasDisruption: Boolean(disruptions.length),
+      disruptions: disruptions.length,
     });
 
   } catch (err) {
