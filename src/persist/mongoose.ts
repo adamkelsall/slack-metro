@@ -1,6 +1,7 @@
 import * as mongoose from "mongoose";
 
-import { Disruption } from ".";
+import { Disruption as DisruptionSchema } from ".";
+import { Disruption as DisruptionElement } from "../input";
 
 interface DisruptionDocument extends mongoose.Document {
   _doc: {
@@ -11,9 +12,10 @@ interface DisruptionDocument extends mongoose.Document {
   }
 }
 
-export async function storeUniqueDisruption(text: string): Promise<void> {
+export async function storeUniqueDisruption(disruption: DisruptionElement): Promise<void> {
   await setupMongoose();
 
+  const text = disruption.lines.join("\n");
   const existingDisruption = (await getDisruptionByText(text) as DisruptionDocument);
 
   if (existingDisruption) {
@@ -29,12 +31,12 @@ async function setupMongoose(): Promise<void> {
 }
 
 async function getDisruptionByText(text: string): Promise<mongoose.Document> {
-  return await Disruption.findOne({ text });
+  return await DisruptionSchema.findOne({ text });
 }
 
 async function createDisruption(text: string): Promise<void> {
   const now = new Date();
-  const disruption = new Disruption({
+  const disruption = new DisruptionSchema({
     createdAt: now,
     occurrences: [now],
     text,
