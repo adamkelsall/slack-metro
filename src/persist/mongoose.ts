@@ -1,4 +1,4 @@
-import * as mongoose from "mongoose";
+import mongoose = require("mongoose");
 
 import { Disruption as DisruptionSchema } from ".";
 import { Disruption as DisruptionElement } from "../input";
@@ -9,7 +9,7 @@ interface DisruptionDocument extends mongoose.Document {
     createdAt: Date,
     occurrences: Date[],
     text: string;
-  }
+  };
 }
 
 export async function storeUniqueDisruption(disruption: DisruptionElement): Promise<void> {
@@ -31,7 +31,7 @@ export async function storeUniqueDisruption(disruption: DisruptionElement): Prom
 }
 
 async function setupMongoose(): Promise<void> {
-  (<any>mongoose).Promise = Promise;
+  mongoose.Promise = Promise;
   await mongoose.connect("localhost:27017/slack-metro");
 }
 
