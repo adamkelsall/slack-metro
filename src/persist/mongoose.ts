@@ -2,15 +2,21 @@ import * as mongoose from "mongoose";
 
 import { Disruption } from ".";
 
+interface DisruptionDocument extends mongoose.Document {
+  _doc: {
+    _id: any;
+    occurrences: Date[],
+    text: string;
+  }
+}
+
 export async function storeUniqueDisruption(text: string): Promise<void> {
   await setupMongoose();
 
-  const existingDisruption = await getDisruptionByText(text);
+  const existingDisruption = (await getDisruptionByText(text) as DisruptionDocument);
 
   if (existingDisruption) {
-    console.log(Object.keys(existingDisruption));
-    console.log(existingDisruption["_doc"]);
-    console.log(existingDisruption["_doc"].occurrences);
+    console.log(existingDisruption._doc);
   }
 }
 
