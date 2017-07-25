@@ -45,4 +45,3 @@ function collapseWhitespace(text: string): string {
 
   return text.replace(lineBreaks, "").replace(whiteSpaces, " ");
 }
-
