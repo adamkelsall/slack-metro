@@ -13,15 +13,20 @@ interface DisruptionDocument extends mongoose.Document {
 }
 
 export async function storeUniqueDisruption(disruption: DisruptionElement): Promise<void> {
-  await setupMongoose();
+  try {
+    await setupMongoose();
 
-  const text = disruption.lines.join("\n");
-  const existingDisruption = (await getDisruptionByText(text) as DisruptionDocument);
+    const text = disruption.lines.join("\n");
+    const existingDisruption = (await getDisruptionByText(text) as DisruptionDocument);
 
-  if (existingDisruption) {
-    await updateDisruption(existingDisruption);
-  } else {
-    await createDisruption(text);
+    if (existingDisruption) {
+      await updateDisruption(existingDisruption);
+    } else {
+      await createDisruption(text);
+    }
+
+  } finally {
+    await mongoose.disconnect();
   }
 }
 
