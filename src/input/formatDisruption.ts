@@ -30,6 +30,9 @@ function formatUpdatedDate(element: Cheerio): Date {
 }
 
 function collapseWhitespace(text: string): string {
-  const whitespaces: RegExp = /\s+/g;
-  return text.replace(whitespaces, " ");
+  const whiteSpaces: RegExp = /\s+/g;
+  const lineBreaks: RegExp = /<br[ /]*>/i;
+
+  return text.replace(lineBreaks, "").replace(whiteSpaces, " ");
 }
+
