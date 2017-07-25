@@ -10,25 +10,21 @@ import { storeUniqueDisruption } from "./persist";
 
 async function processMetroDisruptions(): Promise<void> {
   try {
-    // setConfig();
-    // const config: Config = getConfig();
+    setConfig();
+    const config: Config = getConfig();
 
-    // const metroPage: string = await getWebPage("https://www.nexus.org.uk/metro/updates");
-    // const disruptions: Cheerio = getDisruptions(metroPage);
+    const metroPage: string = await getWebPage("https://www.nexus.org.uk/metro/updates");
+    const disruptions: Cheerio = getDisruptions(metroPage);
 
-    // const persistedData: PersistedLocalData = await readPersistedLocalData();
-    // if (persistedData.disruptions !== disruptions.length) {
-    //   const message = createSlackMessage(persistedData.disruptions, disruptions);
-    //   await postToSlack(config.slackWebhookUrl, message);
-    // }
+    const persistedData: PersistedLocalData = await readPersistedLocalData();
+    if (persistedData.disruptions !== disruptions.length) {
+      const message = createSlackMessage(persistedData.disruptions, disruptions);
+      await postToSlack(config.slackWebhookUrl, message);
+    }
 
-    // await writePersistedLocalData({
-    //   disruptions: disruptions.length,
-    // });
-
-    const disruption = await storeUniqueDisruption("foo");
-    console.dir(disruption);
-    console.log(typeof disruption);
+    await writePersistedLocalData({
+      disruptions: disruptions.length,
+    });
 
   } catch (err) {
     printError(err);
