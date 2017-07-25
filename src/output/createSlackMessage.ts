@@ -5,19 +5,13 @@ import * as pluralize from "pluralize";
 import { SlackMessage, SlackMessageAttachment } from ".";
 import { Disruption, formatDisruption } from "../input";
 
-export function createSlackMessage(previousCount: number, disruptions: Cheerio): SlackMessage {
+export function createSlackMessage(previousCount: number, disruptions: Disruption[]): SlackMessage {
   const message: SlackMessage = {
     text: textForCount(previousCount, disruptions.length),
   };
 
   if (disruptions.length) {
-    const formattedDisruptions: Disruption[] = [];
-
-    disruptions.each((index, disruption) => {
-      formattedDisruptions.push(formatDisruption(disruption));
-    });
-
-    message.attachments = formattedDisruptions.map((disruption, index) => {
+    message.attachments = disruptions.map((disruption, index) => {
       const lines = disruption.lines.join("\n");
       const updated: Moment = moment(disruption.updated);
       const time: string = updated.format("H:mma");

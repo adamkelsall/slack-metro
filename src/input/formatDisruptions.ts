@@ -6,6 +6,16 @@ export interface Disruption {
   updated: Date;
 }
 
+export function formatDisruptions(disruptions: Cheerio): Disruption[] {
+  const formattedDisruptions: Disruption[] = [];
+
+  disruptions.each((index, disruption) => {
+    formattedDisruptions.push(formatDisruption(disruption));
+  });
+
+  return formattedDisruptions;
+}
+
 export function formatDisruption(disruption: CheerioElement): Disruption {
   const $: CheerioStatic = cheerio.load(disruption);
   const lines: string[] = [];
