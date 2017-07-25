@@ -11,7 +11,6 @@ export function formatDisruption(disruption: CheerioElement): Disruption {
   const lines: string[] = [];
 
   $(disruption).children("p").each((index: number, paragraph: CheerioElement) => {
-    const whitespaces: RegExp = /\s+/g;
     const line: string = collapseWhitespace($(paragraph).text()).trim();
     lines.push(line);
   });
