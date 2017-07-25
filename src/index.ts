@@ -21,7 +21,7 @@ async function processMetroDisruptions(): Promise<void> {
       }
 
       const message = createSlackMessage(persistedData.disruptions, formattedDisruptions);
-      // await postToSlack(config.slackWebhookUrl, message);
+      await postToSlack(config.slackWebhookUrl, message);
     }
 
     await writePersistedLocalData({

@@ -7,6 +7,7 @@ import { Disruption, formatDisruption } from "../input";
 
 export function createSlackMessage(previousCount: number, disruptions: Disruption[]): SlackMessage {
   const message: SlackMessage = {
+    channel: "@adamkelsall",
     text: textForCount(previousCount, disruptions.length),
   };
 
