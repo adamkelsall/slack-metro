@@ -6,7 +6,7 @@ import { createSlackMessage, postToSlack, printError } from "./output";
 import { PersistedLocalData, readPersistedLocalData, writePersistedLocalData } from "./persist";
 
 // TODO temp
-import { getDisruptionByText } from "./persist";
+import { storeUniqueDisruption } from "./persist";
 
 async function processMetroDisruptions(): Promise<void> {
   try {
@@ -26,7 +26,7 @@ async function processMetroDisruptions(): Promise<void> {
     //   disruptions: disruptions.length,
     // });
 
-    const disruption = await getDisruptionByText("foo");
+    const disruption = await storeUniqueDisruption("foo");
     console.dir(disruption);
     console.log(typeof disruption);
 
