@@ -16,7 +16,8 @@ export async function storeUniqueDisruption(text: string): Promise<void> {
   const existingDisruption = (await getDisruptionByText(text) as DisruptionDocument);
 
   if (existingDisruption) {
-    console.log(existingDisruption._doc);
+    existingDisruption._doc.occurrences.push(new Date());
+    await existingDisruption.save();
   }
 }
 
