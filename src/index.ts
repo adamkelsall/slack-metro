@@ -3,7 +3,7 @@ import "reflect-metadata";
 import { Config, getConfig, setConfig } from "./config";
 import { getDisruptions, getWebPage } from "./input";
 import { createSlackMessage, postToSlack, printError } from "./output";
-import { PersistedData, readPersistedData, writePersistedData } from "./persist";
+import { PersistedLocalData, readPersistedLocalData, writePersistedLocalData } from "./persist";
 
 async function processMetroDisruptions(): Promise<void> {
   try {
@@ -13,13 +13,13 @@ async function processMetroDisruptions(): Promise<void> {
     const metroPage: string = await getWebPage("https://www.nexus.org.uk/metro/updates");
     const disruptions: Cheerio = getDisruptions(metroPage);
 
-    const persistedData: PersistedData = await readPersistedData();
+    const persistedData: PersistedLocalData = await readPersistedLocalData();
     if (persistedData.disruptions !== disruptions.length) {
       const message = createSlackMessage(persistedData.disruptions, disruptions);
       await postToSlack(config.slackWebhookUrl, message);
     }
 
-    await writePersistedData({
+    await writePersistedLocalData({
       disruptions: disruptions.length,
     });
 
