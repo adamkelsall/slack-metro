@@ -16,7 +16,7 @@ export async function storeUniqueDisruption(disruption: DisruptionElement): Prom
   try {
     await setupMongoose();
 
-    const text = disruption.lines.join("\n");
+    const text = disruption.lines.join(" ");
     const existingDisruption = (await getDisruptionByText(text) as DisruptionDocument);
 
     if (existingDisruption) {
