@@ -13,13 +13,13 @@ async function processMetroDisruptions(): Promise<void> {
     const metroPage: string = await getWebPage("https://www.nexus.org.uk/metro/updates");
     const disruptions: Cheerio = getDisruptions(metroPage);
     const formattedDisruptions: Disruption[] = formatDisruptions(disruptions);
-
     const persistedData: PersistedLocalData = await readPersistedLocalData();
-    if (persistedData.disruptions !== disruptions.length) {
-      for (const disruption of formattedDisruptions) {
-        await storeUniqueDisruption(disruption);
-      }
 
+    for (const disruption of formattedDisruptions) {
+      await storeUniqueDisruption(disruption);
+    }
+
+    if (persistedData.disruptions !== disruptions.length) {
       const message = createSlackMessage(persistedData.disruptions, formattedDisruptions);
       await postToSlack(config.slackWebhookUrl, message);
     }
