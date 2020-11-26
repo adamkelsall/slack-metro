@@ -1,0 +1,17 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-eslint-rules"
+  ],
+  "jsRules": {},
+  "rules": {
+    "interface-name": [true, "never-prefix"],
+    "object-curly-spacing": [true, "always"],
+    "object-literal-sort-keys": true,
+    "ter-indent": [true, 2, {
+      "SwitchCase": 1
+    }]
+  },
+  "rulesDirectory": []
+}
